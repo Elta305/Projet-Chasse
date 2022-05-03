@@ -53,19 +53,37 @@ def init_affichage():
         canvas.create_rectangle((x*largeur_case), (y*hauteur_case), (x*largeur_case+largeur_case), (y*hauteur_case+hauteur_case), fill="red")
 
 # Création des proies et des prédateurs
-
-def creer_proies(Apro=5, x=15, y=15):
+PROIES=[]
+def creer_proies(Apro= 15, x=15, y=15 ):
     global PROIES 
     a = 0
     if len(PROIES) >= 1:
          a = PROIES[-1][0] + 1
-    PROIES.append(a, Apro, [x,y])
+    PROIES.append [a, Apro, [x, y]]
+
+
 
 def creer_n_proies(Npro=5):
     for i in range(Npro):
         x = rd.randint(0, 29) 
         y = rd.randint(0, 29) 
-        creer_proies(x = x, y = y)
+creer_proies(x = x, y = y)
+
+PREDATEURS= []
+
+def creer_predateurs(Apre=15, Epre=12, cible=[], x=15, y=15):
+    global PREDATEURS
+    a=0
+    if len(PREDATEURS)>=1:
+        a= PREDATEURS[-1][0]+1
+    PREDATEURS.append[a, Apre, Epre, cible, [x, y]]
+    
+
+def creer_n_predateurs(Npre=5):
+    for i in range(Npre):
+        x = rd.randint(0, 29) 
+        y = rd.randint(0, 29) 
+creer_predateurs(x = x, y = y)
 # Mouvements généraux
 
 def simulation():
