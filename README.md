@@ -1,5 +1,14 @@
-# Projet-Chasse
-Simulation d'un environnement avec des proies et des prédateurs  
+########################
+# MITD-03
+# Frédéric Li Combeau
+# Lisa Vauvert
+# Victor Combemorel
+# Manel Mokrab
+# https://github.com/uvsq-info/l1-python
+#########################
+
+Projet Chasse
+Simulation d'un environnement avec des proies et des prédateurs.  
 
 
 5 000 premières itérations d'une simulation de 98 855 itérations:  
