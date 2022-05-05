@@ -286,8 +286,19 @@ def manger():
                 PROIES.remove(PROIES[j])
                 break
 
+def repro_pred(predateur):
+    """ list
+        Crée un prédateur
+    """
+    if predateur[-3] >= EREPRO:
+        # predateur[-3] = 14 car Epro = 14
+        predateur[-3] = 14
+        creer_n_predateurs(1)
+
 # Divers
- def superpredateurs():
+
+def superpredateurs():
+    """ Change le mode des prédateurs """
     global MODE_PRE
     if MODE_PRE == 0:
         bouton_pre['text'] = "Mode Super Predateurs"
@@ -299,7 +310,7 @@ def manger():
         MODE_PRE = 0
 
 def sauvegarder(fichier="saves.txt"):
-    """ file ->
+    """ file
         Sauvegarde la configuration à la fin du fichier saves.txt
     """
     sauvegardes = open(fichier, "a")
@@ -307,7 +318,7 @@ def sauvegarder(fichier="saves.txt"):
     sauvegardes.close()
 
 def charger(fichier="saves.txt"):
-    """ file ->
+    """ file
         Charge la sauvegarde associée au numéro donnée
     """
     global PROIES, PREDATEURS
@@ -319,6 +330,8 @@ def charger(fichier="saves.txt"):
     save = save[ligne-1]
     save = ast.literal_eval(save)
     PROIES, PREDATEURS = save[0], save[1]
+    label["text"] = "Sauvegarde " + str(ligne) + " chargée !"
+    bouton_init["text"] = "Jouer"
     init_affichage()
     sauvegardes.close()
 
@@ -334,6 +347,47 @@ def reprendre():
     global INTERRUPTION
     INTERRUPTION = False
     return simulation()
+
+
+#########################
+
+# Partie principale
+
+root = tk.Tk()
+root.title("Chasse")
+
+canvas = tk.Canvas(root, height=HAUTEUR, width=LARGEUR, bg="white")
+canvas.grid(column=1, row=0, rowspan=9)
+
+creer_n_proies()
+creer_n_predateurs()
+init_affichage()
+
+# Création des widgets
+
+bouton_init = tk.Button(text="Jouer", command=simulation)
+bouton_init.grid(column=0, row=1)
+
+label = tk.Label(text="Nombre de proies: " + str(len(PROIES)) + "\nNombre de prédateurs: " + str(len(PREDATEURS)) + "\nNombre d'itérations: " + str(ITERATIONS))
+label.grid(column=0, row=2)
+
+bouton_pre = tk.Button(text="Mode Super Prédateurs", bg="red3", command=superpredateurs)
+bouton_pre.grid(column=0, row=4)
+
+bouton_int = tk.Button(text="Interrompre", command=interruption)
+bouton_int.grid(column=0, row=5)
+bouton_rep = tk.Button(text="Reprendre", command=reprendre)
+bouton_rep.grid(column=0, row=6)
+
+bouton_save = tk.Button(text="Sauvegarder", command=sauvegarder)
+bouton_save.grid(column=0, row=7)
+bouton_char = tk.Button(text="Charger", command=charger)
+bouton_char.grid(column=0, row=8)
+
+
+root.mainloop()
+
+
 
 
 #########################
