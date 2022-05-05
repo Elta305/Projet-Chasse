@@ -4,7 +4,7 @@
 # Lisa Vauvert
 # Victor Combemorel
 # Manel Mokrab
-# https://github.com/uvsq-info/l1-python
+# https://github.com/Elta305/Projet-Chasse
 ########################
 
 # Import des librairies
@@ -24,65 +24,78 @@ LARGEUR = 810
 N = 30
 PROIES = []
 PREDATEURS = []
+FPRO = 3
 MIAM = 5
+EREPRO = 17
 
+MODE_PRE = 1
 INTERRUPTION = False
+ITERATIONS = 0
 
-
-#########################
+####################
 
 # Fonctions
 
 # Affichage
 
 def init_affichage():
-    """ Affiche la grille en paramètre dans un canvas tkinter """
-    global HAUTEUR, LARGEUR, N, PROIES, PREDATEURS
+    """ Affiche la simulation dans un canvas tkinter """
     hauteur_case = HAUTEUR // N
     largeur_case = LARGEUR // N
 
     canvas.delete('all')
-    for k in range(len(PROIES)):
-        x = PROIES[k][-1][0]
-        y = PROIES[k][-1][1]
+    for i in range(len(PROIES)):
+        x = PROIES[i][-1][0]
+        y = PROIES[i][-1][1]
         canvas.create_rectangle((x*largeur_case), (y*hauteur_case), (x*largeur_case+largeur_case), (y*hauteur_case+hauteur_case), fill="black")
-    for l in range(len(PREDATEURS)):
-        x = PREDATEURS[l][-1][0]
-        y = PREDATEURS[l][-1][1]
+    for j in range(len(PREDATEURS)):
+        x = PREDATEURS[j][-1][0]
+        y = PREDATEURS[j][-1][1]
         canvas.create_rectangle((x*largeur_case), (y*hauteur_case), (x*largeur_case+largeur_case), (y*hauteur_case+hauteur_case), fill="red")
 
 # Création des proies et des prédateurs
-PROIES=[]
-def creer_proies(Apro= 15, x=15, y=15 ):
-    global PROIES 
+
+def creer_proies(Apro=7, repro=0, x=15, y=15):
+    """ int, int, int, int
+        Crée une proie
+    """
     a = 0
     if len(PROIES) >= 1:
-         a = PROIES[-1][0] + 1
-    PROIES.append [a, Apro, [x, y]]
+        a = PROIES[-1][0] + 1
+    PROIES.append([a, Apro, repro, [x, y]])
 
-
+def creer_predateurs(Apre=25, Epre=14, cible=[], x=15, y=15):
+    """ int, int, list, int, int
+        Crée un prédateur
+    """
+    a = 0
+    if len(PREDATEURS) >= 1:
+        a = PREDATEURS[-1][0] + 1
+    PREDATEURS.append([a, Apre, Epre, cible, [x, y]])
 
 def creer_n_proies(Npro=5):
+    """ int
+        Crée n proies
+    """
     for i in range(Npro):
-        x = rd.randint(0, 29) 
-        y = rd.randint(0, 29) 
-creer_proies(x = x, y = y)
+        x = rd.randint(0, 29)
+        y = rd.randint(0, 29)
+        while verif_cases(x, y) is False:
+            x = rd.randint(0, 29)
+            y = rd.randint(0, 29)
+        creer_proies(x = x, y = y)
 
-PREDATEURS= []
-
-def creer_predateurs(Apre=15, Epre=12, cible=[], x=15, y=15):
-    global PREDATEURS
-    a=0
-    if len(PREDATEURS)>=1:
-        a= PREDATEURS[-1][0]+1
-    PREDATEURS.append[a, Apre, Epre, cible, [x, y]]
-    
-
-def creer_n_predateurs(Npre=5):
-    for i in range(Npre):
-        x = rd.randint(0, 29) 
-        y = rd.randint(0, 29) 
-creer_predateurs(x = x, y = y)
+def creer_n_predateurs(Npro=2):
+    """ int
+        Crée n prédateurs
+    """
+    for i in range(Npro):
+        x = rd.randint(0, 29)
+        y = rd.randint(0, 29)
+        while verif_cases(x, y) is False:
+            x = rd.randint(0, 29)
+            y = rd.randint(0, 29)
+        creer_predateurs(x = x, y = y)
 # Mouvements généraux
 
 def simulation():
