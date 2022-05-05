@@ -19,6 +19,7 @@ Mode d'emploi:
 
 Cliquez sur "Jouer" pour lancer la simulation.  
 Le nombre de proies, de prédateurs et d'itérations est indiqué en dessous est s'actualise en direct.  
+
 Mode Super Prédateurs: Active le mode Super Prédateurs qui permet aux prédateurs de détecter la proie la plus proche et d'aller vers elle. Cliquez à nouveau pour passer au mode Normal (flair à une portée de 10 maximum)  
 Interrompre: Interrompt la simulation. Si l'on clique sur "Jouer" après avoir interrompu et sans cliquer sur "Reprendre", la simulation se fera itération par itération.  
 Reprendre: Reprend la simulation  
@@ -27,8 +28,8 @@ Charger: Charge une configuration sauvegardée au choix (la 1ère sauvegarde est
 
 
 Evolution d'une simulation de 3 300 itérations:  
-orange: prédateurs  
-bleu: proies  
+Orange: prédateurs  
+Bleu: proies  
 ![graphique](https://media.discordapp.net/attachments/902559091703029765/971737377636745236/proiespred.png)  
 
 Heatmap de la simulation:  
