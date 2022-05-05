@@ -293,11 +293,17 @@ def mouvement_predateur(pr):
                 pr[-1][0], pr[-1][1] = pr[-1][0]-1, pr[-1][1]-1
 
 def manger():
+    """ Gère la satiété des prédateurs et supprime les proies de la liste PROIES si elles sont sur la même case que les prédateurs """
     for i in range(len(PREDATEURS)):
+        PREDATEURS[i][-3] -= 1
         for j in range(len(PROIES)):
             if PREDATEURS[i][-1] == PROIES[j][-1]:
+                PREDATEURS[i][-3] += 5
                 PROIES.remove(PROIES[j])
                 break
+        if PREDATEURS[i][-3] == 0:
+            PREDATEURS.remove(PREDATEURS[i])
+            break
 
 def repro_pred(predateur):
     """ list
