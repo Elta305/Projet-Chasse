@@ -25,7 +25,6 @@ N = 30
 PROIES = []
 PREDATEURS = []
 MIAM = 5
-listPr = []
 
 INTERRUPTION = False
 
@@ -155,57 +154,47 @@ def age():
             PROIES[i][-2] -= 1
             i += 1
 
-def ReproPro():
-    global listPr
+def reprodution_proies():
+    listPr = []
+    global PROIES
     for i in range(len(PROIES)):
         for j in range(len(PROIES)):
             for k in range(-1,1):
                 if PROIES[i][3][0]==PROIES[j][3][1]+k:
                     for l in (-1,1):
                         if PROIES[i][3][0]==PROIES[j][3][1]+l:
-                            verif(i,j)
-    listPr = []
-
-def verif(i,j):
-    global listPr
-    if j != i :
-        h = 0
-        for k in listPr:
-             if k == j or k == i:
-                h=1
-        if h == 0:
-            rep(i,j)
-            listPr.append(j)
-            listPr.append(i)
-
-
-def rep(i,j):
-    x1 = PROIES[i][3][0]
-    y1 = PROIES[i][3][1]
-    x2 = PROIES[j][3][0]
-    y2 = PROIES[j][3][1]
-    xd = x1 - x2
-    yd = y1 - y2
-    h = 0
-    while h == 0:
-        h = 1
-        if xd == 1:
-            x = random.randint(-2,1)
-        else:
-            x = random.randint(-1,1-xd)
-        if yd == 1:
-            y = random.randint(-2,1)
-        else:
-            y = random.randint(-1,1-yd)
-        if xd != 0 and yd != 0:
-            if x == -2*xd and y == 1*yd:
-                h = 0
-            if x == 1*xd and y == -2*yd:
-                h = 0
-        if verif_cases(x1 + x,y1 + y) == False:
-            h = 0
-    PROIES.append([0,Fpro, Apro,(x1 + x,y1 + y)])
-
+                            if j != i :
+                                h = True
+                                for o in listPr:
+                                    if o == j or o == i:
+                                        h = False
+                                if h == True:
+                                    listPr.append(j)
+                                    listPr.append(i)
+                                    x1 = PROIES[i][3][0]
+                                    y1 = PROIES[i][3][1]
+                                    x2 = PROIES[j][3][0]
+                                    y2 = PROIES[j][3][1]
+                                    xd = x1 - x2
+                                    yd = y1 - y2
+                                    while h == True:
+                                        h = False
+                                        if xd == 1:
+                                            x = random.randint(-2,1)
+                                        else:
+                                            x = random.randint(-1,1-xd)
+                                        if yd == 1:
+                                            y = random.randint(-2,1)
+                                        else:
+                                            y = random.randint(-1,1-yd)
+                                        if xd != 0 and yd != 0:
+                                            if x == -2*xd and y == 1*yd:
+                                                h = True
+                                            if x == 1*xd and y == -2*yd:
+                                                h = True
+                                        if verif_cases(x1 + x,y1 + y) == False:
+                                            h = True
+                                    PROIES.append([0,Fpro, Apro,(x1 + x,y1 + y)])
 
 def verif_cases(x, y):
     if x <= 0 or x >= 29 or y <= 0 or y >= 29:
