@@ -28,8 +28,8 @@ Charger: Charge une configuration sauvegardée au choix (la 1ère sauvegarde est
 
 
 Evolution d'une simulation de 3 300 itérations:  
-Orange: prédateurs  
-Bleu: proies  
+Orange: nombre de prédateurs  
+Bleu: nombre de proies  
 ![graphique](https://media.discordapp.net/attachments/902559091703029765/971737377636745236/proiespred.png)  
 
 Heatmap de la simulation:  
