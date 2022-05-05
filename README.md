@@ -4,7 +4,7 @@
 # Lisa Vauvert
 # Victor Combemorel
 # Manel Mokrab
-# https://github.com/uvsq-info/l1-python
+# https://github.com/Elta305/Projet-Chasse
 #########################
 
 Projet Chasse  
