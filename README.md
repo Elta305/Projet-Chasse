@@ -14,4 +14,4 @@ Simulation d'un environnement avec des proies et des prédateurs.
 5 000 premières itérations d'une simulation de 98 855 itérations:  
 orange: prédateurs  
 bleu: proies  
-![graphique](https://media.discordapp.net/attachments/785967439732670474/971541749644267560/proiespred25k.png?width=2417&height=386)
+![graphique](https://media.discordapp.net/attachments/785967439732670474/971688031364976670/proiespred.png?width=2417&height=478)
