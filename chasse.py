@@ -333,12 +333,10 @@ def repro_pred(predateur):
 
 # Divers
 
+
+# Divers
+
 def superpredateurs(bouton_pre):
-    """ Change le mode des prédateurs """
-    global MODE_PRE
-    
-    
-def superpredateurs():
     """ Change le mode des prédateurs """
     global MODE_PRE
     if MODE_PRE == 0:
@@ -389,6 +387,70 @@ def reprendre():
     INTERRUPTION = False
     return simulation()
 
+def params_entree(entree, id, label):
+    global APRO, FPRO, APRE, EREPRO, EPRE, MIAM, TEMPS_ATTENTE
+    if not entree.isnumeric():
+        return
+    if id == 0:
+        APRO = int(entree)
+        label['text'] = "Apro = " + str(APRO)
+    elif id == 1:
+        FPRO = int(entree)
+        label['text'] = "Fpro = " + str(FPRO)
+    elif id == 2:
+        APRE = int(entree)
+        label['text'] = "Apre = " + str(APRE)
+    elif id == 3:
+        print(EPRE)
+        if EPRE > int(entree):
+            label['text'] = "Erepro ne peut pas être plus petit que Epro !"
+            return
+        EREPRO = int(entree)
+        label['text'] = "Erepro = " + str(EREPRO)
+    elif id == 4:
+        EPRE = int(entree)
+        label['text'] = "Epre = " + str(EPRE)
+    elif id == 5:
+        MIAM = int(entree)
+        label['text'] = "Miam = " + str(MIAM)
+    elif id == 6:
+        TEMPS_ATTENTE = int(entree)
+        label['text'] = "Temps d'attente = " + str(TEMPS_ATTENTE) + "ms"
+
+def menu_params():
+    menu = tk.Toplevel()
+    entry = tk.Entry(menu, text="Entrée", textvariable=tk.StringVar())
+    entry.grid(column=0, row=0)
+    label_apro = tk.Label(menu, text="Apro = " + str(APRO))
+    label_apro.grid(column=1, row=1)
+    bouton_apro = tk.Button(menu, text="Apro", command=lambda: params_entree(entry.get(), 0, label_apro))
+    bouton_apro.grid(column=0, row=1)
+    label_fpro = tk.Label(menu, text="Fpro = " + str(FPRO))
+    label_fpro.grid(column=1, row=2)
+    bouton_fpro = tk.Button(menu, text="Fpro", command=lambda: params_entree(entry.get(), 1, label_fpro))
+    bouton_fpro.grid(column=0, row=2)
+    label_apre = tk.Label(menu, text="Apre = " + str(APRE))
+    label_apre.grid(column=1, row=3)
+    bouton_apre = tk.Button(menu, text="Apre", command=lambda: params_entree(entry.get(), 2, label_apre))
+    bouton_apre.grid(column=0, row=3)
+    label_erepro = tk.Label(menu, text="Erepro = " + str(EREPRO))
+    label_erepro.grid(column=1, row=4)
+    bouton_erepro = tk.Button(menu, text="Erepro", command=lambda: params_entree(entry.get(), 3, label_erepro))
+    bouton_erepro.grid(column=0, row=4)
+    label_epre = tk.Label(menu, text="Epre = " + str(EPRE))
+    label_epre.grid(column=1, row=5)
+    bouton_epre = tk.Button(menu, text="Epre", command=lambda: params_entree(entry.get(), 4, label_epre))
+    bouton_epre.grid(column=0, row=5)
+    label_miam = tk.Label(menu, text="Miam = " + str(MIAM))
+    label_miam.grid(column=1, row=6)
+    bouton_miam = tk.Button(menu, text="Miam", command=lambda: params_entree(entry.get(), 5, label_miam))
+    bouton_miam.grid(column=0, row=6)
+    label_tempsattente = tk.Label(menu, text="Temps d'attente = " + str(TEMPS_ATTENTE) + "ms")
+    label_tempsattente.grid(column=1, row=7)
+    bouton_tempsattente = tk.Button(menu, text="Temps d'attente", command=lambda: params_entree(entry.get(), 6, label_tempsattente))
+    bouton_tempsattente.grid(column=0, row=7)
+    bouton_pre = tk.Button(menu, text="Mode Super Prédateurs", bg="red3", command=lambda: superpredateurs(bouton_pre))
+    bouton_pre.grid(column=0, row=8)
 
 #########################
 
@@ -412,8 +474,8 @@ bouton_init.grid(column=0, row=1)
 label = tk.Label(text="Nombre de proies: " + str(len(PROIES)) + "\nNombre de prédateurs: " + str(len(PREDATEURS)) + "\nNombre d'itérations: " + str(ITERATIONS))
 label.grid(column=0, row=2)
 
-bouton_pre = tk.Button(text="Mode Super Prédateurs", bg="red3", command=superpredateurs)
-bouton_pre.grid(column=0, row=4)
+bouton_param = tk.Button(text="Paramètres", command=menu_params)
+bouton_param.grid(column=0, row=4)
 
 bouton_int = tk.Button(text="Interrompre", command=interruption)
 bouton_int.grid(column=0, row=5)
@@ -426,39 +488,4 @@ bouton_char = tk.Button(text="Charger", command=charger)
 bouton_char.grid(column=0, row=8)
 
 
-root.mainloop()
-
-
-
-
-#########################
-
-# Partie principale
-
-root = tk.Tk()
-root.title("Génération de terrain")
-
-canvas = tk.Canvas(root, height=HAUTEUR, width=LARGEUR)
-canvas.grid(column=1, row=0, rowspan=9)
-
-# Création des widgets
-
-bouton_init = tk.Button(text="Play", command=simulation)
-bouton_init.grid(column=0, row=1)
-
-bouton_pre = tk.Button(text="Mode Super Prédateurs", bg="red3", command=superpredateurs)
-bouton_pre.grid(column=0, row=3)
-
-bouton_int = tk.Button(text="Interrompre", command=interruption)
-bouton_int.grid(column=0, row=5)
-bouton_rep = tk.Button(text="Reprendre", command=reprendre)
-bouton_rep.grid(column=0, row=6)
-
-bouton_save = tk.Button(text="Sauvegarder", command=sauvegarder)
-bouton_save.grid(column=0, row=7)
-bouton_char = tk.Button(text="Charger", command=charger)
-bouton_char.grid(column=0, row=8)
-
-
-init_affichage()
 root.mainloop()
