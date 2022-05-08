@@ -32,6 +32,35 @@ MODE_PRE = 1
 INTERRUPTION = False
 ITERATIONS = 0
 
+# Variables globales
+
+# Paramètres de base
+
+HAUTEUR = 810
+LARGEUR = 810
+N = 30
+PROIES = []
+PREDATEURS = []
+
+# Paramètres proies
+
+APRO = 7
+FPRO = 3
+
+# Paramètres prédateurs
+
+APRE = 25
+EREPRO = 17
+EPRE = 14
+MIAM = 5
+
+# Paramèters divers
+
+MODE_PRE = 1
+TEMPS_ATTENTE = 60
+INTERRUPTION = False
+ITERATIONS = 0
+
 ####################
 
 # Fonctions
