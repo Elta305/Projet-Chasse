@@ -112,7 +112,10 @@ def simulation():
     elif INTERRUPTION == False:
         root.after(150, simulation)
 
-def mouvements(pr):
+def verif_mouv(pr):
+    """ list -> list
+        Renvoie une liste contenant toutes les valeurs qui représentent des cases libres
+    """
     nb = [0, 1, 2, 3, 4, 5, 6, 7]
     for j in range(8):
         if j == 0:
@@ -167,47 +170,32 @@ def age():
             PROIES[i][-2] -= 1
             i += 1
 
-def reprodution_proies():
-    listPr = []
-    global PROIES
-    for i in range(len(PROIES)):
-        for j in range(len(PROIES)):
-            for k in range(-1,1):
-                if PROIES[i][3][0]==PROIES[j][3][1]+k:
-                    for l in (-1,1):
-                        if PROIES[i][3][0]==PROIES[j][3][1]+l:
-                            if j != i :
-                                h = True
-                                for o in listPr:
-                                    if o == j or o == i:
-                                        h = False
-                                if h == True:
-                                    listPr.append(j)
-                                    listPr.append(i)
-                                    x1 = PROIES[i][3][0]
-                                    y1 = PROIES[i][3][1]
-                                    x2 = PROIES[j][3][0]
-                                    y2 = PROIES[j][3][1]
-                                    xd = x1 - x2
-                                    yd = y1 - y2
-                                    while h == True:
-                                        h = False
-                                        if xd == 1:
-                                            x = random.randint(-2,1)
-                                        else:
-                                            x = random.randint(-1,1-xd)
-                                        if yd == 1:
-                                            y = random.randint(-2,1)
-                                        else:
-                                            y = random.randint(-1,1-yd)
-                                        if xd != 0 and yd != 0:
-                                            if x == -2*xd and y == 1*yd:
-                                                h = True
-                                            if x == 1*xd and y == -2*yd:
-                                                h = True
-                                        if verif_cases(x1 + x,y1 + y) == False:
-                                            h = True
-                                    PROIES.append([0,Fpro, Apro,(x1 + x,y1 + y)])
+def reproduction(proie):
+    """ list
+        Reproduit les proies entre elles
+    """
+    nb = [0, 1, 2, 3, 4, 5, 6, 7]
+    nb2 = verif_mouv(proie)
+    new_coords = [(-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1)]
+    k = 0
+    while k < len(nb):
+        if nb[k] not in nb2:
+            nb.remove(nb[k])
+            k -= 1
+        k += 1
+    for j in range(len(PROIES)):
+        if proie[0] != PROIES[j][0] and proie[-2] != 1 and PROIES[j][-2] != 1 and nb != []:
+            if ((proie[-1][0] == PROIES[j][-1][0]-1 and proie[-1][1] == PROIES[j][-1][1]-1)
+            or (proie[-1][0] == PROIES[j][-1][0] and proie[-1][1] == PROIES[j][-1][1]-1) 
+            or (proie[-1][0] == PROIES[j][-1][0]+1 and proie[-1][1] == PROIES[j][-1][1]-1)
+            or (proie[-1][0] == PROIES[j][-1][0]-1 and proie[-1][1] == PROIES[j][-1][1]) 
+            or (proie[-1][0] == PROIES[j][-1][0]+1 and proie[-1][1] == PROIES[j][-1][1])
+            or (proie[-1][0] == PROIES[j][-1][0]-1 and proie[-1][1] == PROIES[j][-1][1]+1) 
+            or (proie[-1][0] == PROIES[j][-1][0] and proie[-1][1] == PROIES[j][-1][1]+1)
+            or (proie[-1][0] == PROIES[j][-1][0]+1 and proie[-1][1] == PROIES[j][-1][1]+1)):
+                a = rd.choice(nb)
+                reprod_case(a, proie, new_coords)
+                proie[-2], PROIES[j][-2] = 1, 1
 
 def verif_cases(x, y):
     if x <= 0 or x >= 29 or y <= 0 or y >= 29:
