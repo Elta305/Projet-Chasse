@@ -38,6 +38,7 @@ APRE = 25
 EREPRO = 17
 EPRE = 14
 MIAM = 5
+FLAIR = 10
 
 # Paramèters divers
 
@@ -51,6 +52,7 @@ ITERATIONS = 0
 # predlen = [2]
 # proies = []
 # pred = []
+
 
 ####################
 
@@ -302,7 +304,7 @@ def flair(predateur, distance=1000, cible = []):
             if MODE_PRE == 0:
                 cible = PROIES[j][-1]
             else:
-                if distance <= 10:
+                if distance <= FLAIR:
                     cible = PROIES[j][-1]
         predateur[-2] = cible
     return cible
@@ -447,7 +449,6 @@ def params_entree(entree, id, label):
         APRE = int(entree)
         label['text'] = "Apre = " + str(APRE)
     elif id == 3:
-        print(EPRE)
         if EPRE > int(entree):
             label['text'] = "Erepro ne peut pas être plus petit que Epro !"
             return
@@ -491,12 +492,17 @@ def menu_params():
     label_miam.grid(column=1, row=6)
     bouton_miam = tk.Button(menu, text="Miam", command=lambda: params_entree(entry.get(), 5, label_miam))
     bouton_miam.grid(column=0, row=6)
+    label_flair = tk.Label(menu, text="Flair = " + str(FLAIR))
+    label_flair.grid(column=1, row=7)
+    bouton_flair = tk.Button(menu, text="Flair", command=lambda: params_entree(entry.get(), 5, label_flair))
+    bouton_flair.grid(column=0, row=7)
     label_tempsattente = tk.Label(menu, text="Temps d'attente = " + str(TEMPS_ATTENTE) + "ms")
-    label_tempsattente.grid(column=1, row=7)
+    label_tempsattente.grid(column=1, row=8)
     bouton_tempsattente = tk.Button(menu, text="Temps d'attente", command=lambda: params_entree(entry.get(), 6, label_tempsattente))
-    bouton_tempsattente.grid(column=0, row=7)
+    bouton_tempsattente.grid(column=0, row=8)
     bouton_pre = tk.Button(menu, text="Mode Super Prédateurs", bg="red3", command=lambda: superpredateurs(bouton_pre))
-    bouton_pre.grid(column=0, row=8)
+    bouton_pre.grid(column=0, row=9)
+
 
 #########################
 
