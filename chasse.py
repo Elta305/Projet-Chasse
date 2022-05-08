@@ -304,6 +304,11 @@ def repro_pred(predateur):
 
 # Divers
 
+def superpredateurs(bouton_pre):
+    """ Change le mode des prédateurs """
+    global MODE_PRE
+    
+    
 def superpredateurs():
     """ Change le mode des prédateurs """
     global MODE_PRE
