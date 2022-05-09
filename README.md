@@ -25,7 +25,7 @@ Mode Super Prédateurs: Active le mode Super Prédateurs qui permet aux prédate
 Interrompre: Interrompt la simulation. Si l'on clique sur "Jouer" après avoir interrompu et sans cliquer sur "Reprendre", la simulation se fera itération par itération.  
 Reprendre: Reprend la simulation  
 Sauvegarder: Sauvegarde la configuration actuelle dans le fichier "saves.txt" (le fichier se crée automatiquement s'il n'existe pas).  
-Charger: Charge une configuration sauvegardée au choix (la 1ère sauvegarde est à l'indice 1 et non 0)  
+Charger: Charge une configuration sauvegardée au choix (la 1ère sauvegarde est à l'indice 1 et non 0). Ecrire le numéro de sauvegarde dans l'entrée au dessus du bouton.  
 
 
 Evolution d'une simulation de 3 300 itérations:  
