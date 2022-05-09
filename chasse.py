@@ -440,6 +440,9 @@ def reprendre():
     return simulation()
 
 def params_entree(entree, id, label):
+    """ str, int, tk.Label
+        Modifie le paramètre choisi
+    """
     global APRO, FPRO, APRE, EREPRO, EPRE, MIAM, TEMPS_ATTENTE
     if not entree.isnumeric():
         return
@@ -472,6 +475,7 @@ def params_entree(entree, id, label):
         label['text'] = "Temps d'attente = " + str(TEMPS_ATTENTE) + "ms"
 
 def menu_params():
+    """ Affiche le menu des paramètres """
     menu = tk.Toplevel()
     entry = tk.Entry(menu, text="Entrée", textvariable=tk.StringVar())
     entry.grid(column=0, row=0)
