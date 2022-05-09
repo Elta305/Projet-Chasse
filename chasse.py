@@ -413,7 +413,8 @@ def charger(fichier="saves.txt"):
     sauvegardes = open(fichier, "r")
     save = sauvegardes.readlines()
     if ligne >= len(save)+1 or ligne <= 0:
-        return print("Sauvegarde inexistante !")
+        label["text"] = "Sauvegarde inexistante !"
+        return
     save = save[ligne-1]
     save = ast.literal_eval(save)
     PROIES, PREDATEURS = save[0], save[1]
