@@ -461,6 +461,9 @@ def params_entree(entree, id, label):
         MIAM = int(entree)
         label['text'] = "Miam = " + str(MIAM)
     elif id == 6:
+        FLAIR = int(entree)
+        label['text'] = "Flair = " + str(FLAIR)
+    elif id == 7:
         TEMPS_ATTENTE = int(entree)
         label['text'] = "Temps d'attente = " + str(TEMPS_ATTENTE) + "ms"
 
@@ -494,11 +497,11 @@ def menu_params():
     bouton_miam.grid(column=0, row=6)
     label_flair = tk.Label(menu, text="Flair = " + str(FLAIR))
     label_flair.grid(column=1, row=7)
-    bouton_flair = tk.Button(menu, text="Flair", command=lambda: params_entree(entry.get(), 5, label_flair))
+    bouton_flair = tk.Button(menu, text="Flair", command=lambda: params_entree(entry.get(), 6, label_flair))
     bouton_flair.grid(column=0, row=7)
     label_tempsattente = tk.Label(menu, text="Temps d'attente = " + str(TEMPS_ATTENTE) + "ms")
     label_tempsattente.grid(column=1, row=8)
-    bouton_tempsattente = tk.Button(menu, text="Temps d'attente", command=lambda: params_entree(entry.get(), 6, label_tempsattente))
+    bouton_tempsattente = tk.Button(menu, text="Temps d'attente", command=lambda: params_entree(entry.get(), 7, label_tempsattente))
     bouton_tempsattente.grid(column=0, row=8)
     bouton_pre = tk.Button(menu, text="Mode Super Prédateurs", bg="red3", command=lambda: superpredateurs(bouton_pre))
     bouton_pre.grid(column=0, row=9)
