@@ -409,7 +409,10 @@ def charger(fichier="saves.txt"):
         Charge la sauvegarde associée au numéro donnée
     """
     global PROIES, PREDATEURS
-    ligne = int(input("Entrez le numéro de la sauvegarde : "))
+    entree = entree_chargement.get()
+    if not entree.isnumeric():
+        return
+    ligne = int(entree)
     sauvegardes = open(fichier, "r")
     save = sauvegardes.readlines()
     if ligne >= len(save)+1 or ligne <= 0:
@@ -516,7 +519,7 @@ root = tk.Tk()
 root.title("Chasse")
 
 canvas = tk.Canvas(root, height=HAUTEUR, width=LARGEUR, bg="white")
-canvas.grid(column=1, row=0, rowspan=9)
+canvas.grid(column=1, row=0, rowspan=10)
 
 creer_n_proies()
 creer_n_predateurs()
@@ -540,8 +543,10 @@ bouton_rep.grid(column=0, row=6)
 
 bouton_save = tk.Button(text="Sauvegarder", command=sauvegarder)
 bouton_save.grid(column=0, row=7)
+entree_chargement = tk.Entry(text="Entrée", textvariable=tk.StringVar())
+entree_chargement.grid(column=0, row=8)
 bouton_char = tk.Button(text="Charger", command=charger)
-bouton_char.grid(column=0, row=8)
+bouton_char.grid(column=0, row=9)
 
 
 root.mainloop()
